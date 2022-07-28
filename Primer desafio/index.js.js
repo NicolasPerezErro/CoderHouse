@@ -20,8 +20,8 @@ class Usuario{
         return this.mascotas.length;
     }
 
-    addBook(nombre,autor){                // En este caso el parametro es el mismo que la propiedad del objeto, entonces lo asigna directamente
-        this.libros.push({nombre,autor}); // Tambien se puede poner la propiedad: parametro -> nombre: parametroNom, autor: parametroAutor
+    addBook(nombre,autor){               
+        this.libros.push({nombre,autor});
     }
 
     getBookNames(){

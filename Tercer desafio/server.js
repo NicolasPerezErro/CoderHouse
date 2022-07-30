@@ -14,15 +14,14 @@ async function main() {
     const productosDisponibles = await producto1.getAll();
     let numeroR = 0;
 
-
     app.get('/productos', (req, res) => {
         res.send(productosDisponibles);
     });
 
-    app.get('/productoRandom', (req, res) => {
+    app.get('/productoRandom', async (req, res) => {
         numeroR = numeroRandom(productosDisponibles.length);
-        console.log(numeroR);
-        res.send(productosDisponibles[numeroR-1]);
+        const productoRandom = await producto1.getById(numeroR);
+        res.send(productoRandom);
     });
 
     const server = app.listen(8080, () => {

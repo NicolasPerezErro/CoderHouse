@@ -1,0 +1,1 @@
+El motor de plantilla que prefiero usar es el ejs ya que me resulta más familiar, es fácil de implementar y tiene una buena organización

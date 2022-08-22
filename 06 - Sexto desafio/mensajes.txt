@@ -1,0 +1,20 @@
+[
+	{
+		"email": "nico_perez99@hotmail.com",
+		"fechayHora": "[19/8/2022 17:19:03]",
+		"mensaje": "holaa",
+		"id": 1
+	},
+	{
+		"email": "nico_perez99@hotmail.com",
+		"fechayHora": "[21/8/2022 13:38:58]",
+		"mensaje": "Hola",
+		"id": 2
+	},
+	{
+		"email": "nico_perez99@hotmail.com",
+		"fechayHora": "[21/8/2022 22:26:36]",
+		"mensaje": "Buenas noches",
+		"id": 3
+	}
+]

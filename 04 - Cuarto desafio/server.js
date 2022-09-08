@@ -1,46 +1,14 @@
 const express = require('express');
-const { Router } = express;
-const ProductosApi = require('./api/productos.js');
 
-const productosApi = new ProductosApi();
-const productosRouter = new Router();
+const app = express();
+productosRoutes.use(express.json());
+productosRoutes.use(express.urlencoded({ extended: true }));
 
-productosRouter.use(express.json());
-productosRouter.use(express.urlencoded({ extended: true }));
+const productosRoutes = require('./routes/productsRoutes.js'); // importo Routers
 
-productosRouter.get('/', (req, res) => {
-    res.send(productosApi.listarAll());
-});
-
-productosRouter.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const producto = productosApi.listar(id);
-    res.send(producto);
-});
-
-productosRouter.post('/', (req, res) => {
-    const body = req.body;
-    const producto = productosApi.guardar(body);
-    res.send(producto);
-});
-
-productosRouter.put('/:id', (req, res) => {
-    const id = req.params.id;
-    const producto = req.body;
-    let productoActualizado = productosApi.actualizar(producto, id);
-    res.send(productoActualizado);
-});
-
-productosRouter.delete('/:id', (req, res) => {
-    const id = req.params.id;
-    let productoBorrado = productosApi.borrar(id);
-    res.send(productoBorrado);
-});
-
-
-const app = express()
 app.use(express.static('public'));
-app.use('/api/productos', productosRouter);
+
+app.use('/api/productos', productosRoutes); //defino la ruta principal del Router
 
 const PORT = 8080
 const server = app.listen(PORT, () => {

@@ -1,8 +1,9 @@
 const express = require('express');
 
 const app = express();
-productosRoutes.use(express.json());
-productosRoutes.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const productosRoutes = require('./routes/productsRoutes.js'); // importo Routers
 

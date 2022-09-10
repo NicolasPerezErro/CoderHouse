@@ -1,0 +1,110 @@
+use ecommerce
+
+db.createCollection("mensajes")
+db.createCollection("productos")
+
+db.mensajes.insertMany([{
+    email: "prueba@gmail.com",
+    fechayHora: "[21/8/2022 22:26:36]",
+    mensaje: "hola"
+},{ 
+    email: "nico@hotmail.com",
+    fechayHora: "[21/8/2022 22:28:30]",
+    mensaje: "Buenas" 
+ },{
+    email: "nico@hotmail.com",
+    fechayHora: "[21/8/2022 22:28:47]",
+    mensaje: "probando123"
+},{
+    email: "prueba@gmail.com",
+    fechayHora: "[21/8/2022 22:29:04]",
+    mensaje: "holaaaa"
+},{
+    email: "kevin@gmail.com",
+    fechayHora: "[21/8/2022 22:31:13]",
+    mensaje: "que tal?"
+},{
+    email: "kevin@gmail.com",
+    fechayHora: "[21/8/2022 22:32:01]",
+    mensaje: "alguien?"
+},{
+    email: "axel@gmail.com",
+    fechayHora: "[21/8/2022 22:32:16]",
+    mensaje: "holaa?"
+},{
+    email: "prueba@gmail.com",
+    fechayHora: "[21/8/2022 22:32:30]",
+    mensaje: "ejemplo"
+},{
+    email: "Tom@gmail.com",
+    fechayHora: "[21/8/2022 22:32:52]",
+    mensaje: "xd"
+},{
+    email: "admin@gmail.com",
+    fechayHora: "[21/8/2022 22:33:20]",
+    mensaje: "adios"
+}])
+
+db.productos.insertMany([{
+    title: "copa de vidrio",
+    price: 1280,
+    thumbnail: "https://listado.mercadolibre.com.ar/copas"
+},{ 
+    title: "cartuchera",
+    price: 580,
+    thumbnail: "https://listado.mercadolibre.com.ar/cartucheras"
+ },{
+    title: "plato",
+    price: 900,
+    thumbnail: "https://listado.mercadolibre.com.ar/platos"
+},{
+    title: "resaltador",
+    price: 120,
+    thumbnail: "https://listado.mercadolibre.com.ar/resaltador"
+},{
+    title: "billetera",
+    price: 1700,
+    thumbnail: "https://listado.mercadolibre.com.ar/billeteras"
+},{
+    title: "pelota de futbol",
+    price: 2300,
+    thumbnail: "https://listado.mercadolibre.com.ar/futbol"
+},{
+    title: "camiseta",
+    price: 2860,
+    thumbnail: "https://listado.mercadolibre.com.ar/camisetas"
+},{
+    title: "pantalon",
+    price: 3350,
+    thumbnail: "https://listado.mercadolibre.com.ar/pantalon"
+},{
+    title: "auriculares",
+    price: 4320,
+    thumbnail: "https://listado.mercadolibre.com.ar/auriculares"
+},{
+    title: "reloj",
+    price: 4990,
+    thumbnail: "https://listado.mercadolibre.com.ar/relojes"
+}])
+
+db.mensajes.find()
+db.productos.find()
+
+db.mensajes.countDocuments()
+db.productos.countDocuments()
+
+db.productos.insertOne({title: "pulsera", price: 754, thumbnail: "https://listado.mercadolibre.com.ar/pulseras"})
+
+db.productos.find({price: {$lt: 1000}})
+db.productos.find({$and:[{price: {$gte:1000}},{price: {$lte:3000}}]})
+db.productos.find({price: {$gt: 3000}})
+db.productos.find({},{title: 1}).limit(1).sort({price: 1})
+
+db.productos.updateMany({}, {$set:{stock: 100}})
+
+db.productos.updateMany({price: {$gte:4000}}, {$set:{stock: 0}})
+
+db.productos.deleteMany({price: {$lt:1000}})
+
+use admin
+db.createUser({user:"pepe",pwd:"asd456",roles:[{role:"read",db:"ecommerce"}]})

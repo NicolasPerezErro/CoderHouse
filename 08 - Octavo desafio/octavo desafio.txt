@@ -98,7 +98,7 @@ db.productos.insertOne({title: "pulsera", price: 754, thumbnail: "https://listad
 db.productos.find({price: {$lt: 1000}})
 db.productos.find({$and:[{price: {$gte:1000}},{price: {$lte:3000}}]})
 db.productos.find({price: {$gt: 3000}})
-db.productos.find({},{title: 1}).limit(1).sort({price: 1})
+db.productos.find({},{title: 1}).limit(1).sort({price: 1}).skip(2)
 
 db.productos.updateMany({}, {$set:{stock: 100}})
 

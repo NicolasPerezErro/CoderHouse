@@ -1,0 +1,12 @@
+[
+	{
+		"title": "coca2",
+		"description": "bebida",
+		"code": 600,
+		"thumbnail": "www.prueba.com",
+		"price": 200,
+		"stock": 1235678,
+		"id": 1,
+		"timestamp": 1663727416394
+	}
+]

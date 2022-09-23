@@ -1,4 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import app from './server.js'
+
+
+console.log(process.env.PERS);
 
 const PORT = 8080
 const server = app.listen(PORT, () => {

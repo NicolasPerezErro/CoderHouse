@@ -11,7 +11,7 @@ class ContenedorArchivo {
 
     async obtenerPorId(id) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             if (contenido.length > 0) {
                 this.vecObj = JSON.parse(contenido, null, '\t');;
                 let idEncontrado = false;
@@ -39,7 +39,7 @@ class ContenedorArchivo {
 
     async borrarPorId(id) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             try {
                 if (contenido.length > 0) {
                     this.vecObj = JSON.parse(contenido, null, '\t');
@@ -54,7 +54,7 @@ class ContenedorArchivo {
 
                     if (idEncontrado) {
                         this.vecObj.splice(pos, 1);
-                        await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
+                        await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
                         console.log("Objeto eliminado");
                     } else {
                         console.log("id no encontrado");
@@ -78,7 +78,7 @@ class ContenedorArchivo {
             vecAux.length = 0;
         }
         try {
-            await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(vecAux, null, '\t')}`);
+            await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(vecAux, null, '\t')}`);
             console.log('Todos los objetos fueron eliminados');
         } catch (error) {
             throw new Error('Error de escritura');
@@ -89,7 +89,7 @@ class ContenedorArchivo {
 
     async obtenerTodo() {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             if (contenido.length > 0) {
                 this.vecObj = JSON.parse(contenido, null, '\t');
                 return this.vecObj;
@@ -104,7 +104,7 @@ class ContenedorArchivo {
 
     async guardarProducto(objeto) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             try {
                 if (contenido.length > 0) {
                     let ultimoId = 0;
@@ -121,7 +121,7 @@ class ContenedorArchivo {
                 }
                 objeto.timestamp = Date.now();
                 this.vecObj.push(objeto);
-                await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
+                await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
                 console.log("Escritura exitosa");
 
             } catch (error) {
@@ -135,7 +135,7 @@ class ContenedorArchivo {
 
     async actualizarProducto(objeto, id) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             try {
                 if (contenido.length > 0) {
                     this.vecObj = JSON.parse(contenido, null, '\t');
@@ -161,7 +161,7 @@ class ContenedorArchivo {
                 } else {
                     console.log('producto no encontrado');
                 }
-                await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
+                await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
                 console.log("Actualizacion exitosa");
             } catch (error) {
                 throw new Error('Error de escritura');
@@ -175,7 +175,7 @@ class ContenedorArchivo {
 
     async crearCarrito(objeto) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             try {
                 if (contenido.length > 0) {
                     let ultimoId = 0;
@@ -193,7 +193,7 @@ class ContenedorArchivo {
                 objeto.timestamp = Date.now();
                 objeto.productos = [];
                 this.vecObj.push(objeto);
-                await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
+                await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
                 console.log("Escritura exitosa");
 
             } catch (error) {
@@ -207,7 +207,7 @@ class ContenedorArchivo {
 
     async insertarProdEnCarrito(objeto, idCarrito) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             try {
                 if (contenido.length > 0) {
                     this.vecObj = JSON.parse(contenido, null, '\t');
@@ -228,7 +228,7 @@ class ContenedorArchivo {
                         console.log('carrito no encontrado');
                     }
                 }
-                await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
+                await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
                 console.log("producto agregado al carrito");
             } catch (error) {
                 throw new Error('Error de escritura');
@@ -241,7 +241,7 @@ class ContenedorArchivo {
 
     async borrarProdDeCarrito(idProducto, idCarrito) {
         try {
-            const contenido = await fs.promises.readFile(`./${this.nombreArchivo}`, 'utf-8');
+            const contenido = await fs.promises.readFile(`${config.fileSystem.path}${this.nombreArchivo}`, 'utf-8');
             try {
                 if (contenido.length > 0) {
                     this.vecObj = JSON.parse(contenido, null, '\t');
@@ -270,7 +270,7 @@ class ContenedorArchivo {
 
                     if (idCarritoEncontrado && idProductoEncontrado) {
                         this.vecObj[posCarrito].productos.splice(posProd, 1);
-                        await fs.promises.writeFile(`./${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
+                        await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
                         console.log("producto eliminado del carrito");
                     } else {
                         console.log("ids no encontrados");

@@ -1,6 +1,6 @@
 export default {
     fileSystem: {
-        path: './DB'
+        path: './DB/'
     },
     mongodb: {
         cnxStr: 'mongodb://localhost/ecommerce',

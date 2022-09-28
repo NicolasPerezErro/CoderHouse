@@ -1,7 +1,7 @@
 import express from 'express';
 import faker from 'faker';
 import normalizr from 'normalizr';
-import util from 'util';
+import util from 'util'
 
 import { Server as HttpServer } from 'http';
 import { Server as IOServer } from 'socket.io';
@@ -29,20 +29,20 @@ function print(objeto) {
     console.log(util.inspect(objeto, false, 12, true));
 }
 
-const normalize = normalizr.normalize;
-const schema = normalizr.schema;
+async function normalizarMensajes(mensajes) {
+    const normalize = normalizr.normalize;
+    const schema = normalizr.schema;
 
-const autor = new schema.Entity('autor');
-const msg = new schema.Entity('mensaje', {
-    author: autor
-});
-const posts = new schema.Entity('posts', {
-    mensajes: [msg]
-});
+    const autor = new schema.Entity('autor');
+    const msg = new schema.Entity('mensaje', {
+        author: autor
+    });
+    const posts = new schema.Entity('posts', {
+        mensajes: [msg]
+    });
 
+    const normalizedMensajes = normalize(mensajes, posts);
 
-async function normalizarMensajes(mensajes,schema) {
-    const normalizedMensajes = normalize(mensajes, schema);
     return normalizedMensajes;
 }
 
@@ -54,7 +54,7 @@ io.on('connection', async socket => {
 
     //cargo historial de productos y mensajes
     io.emit('productos', await productosApi.listarAll());
-    io.emit('mensajes', await mensajesApi.listarAll());
+    io.emit('mensajes', await normalizarMensajes(await mensajesApi.listarAll()));
 
     //-----------------------------------------------------
     socket.on('update', async producto => {
@@ -66,8 +66,8 @@ io.on('connection', async socket => {
     socket.on('nuevo-mensaje', async data => {
         //guardo archivo
         await mensajesApi.guardar(data);
-        const mensajeNormalizado = await normalizarMensajes(await mensajesApi.listarAll(),posts);
-        //io.sockets.emit('mensajes', await mensajesApi.listarAll());
+        const mensajeNormalizado = await normalizarMensajes(await mensajesApi.listarAll());
+        print(mensajeNormalizado);
         io.sockets.emit('mensajes', mensajeNormalizado);
     });
 });

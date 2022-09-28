@@ -1,7 +1,5 @@
 const socket = io.connect();
 
-import normalizr from 'normalizr';
-
 //------------------------------------------------------------------------------------
 // PRODUCTOS
 const formAgregarProducto = document.getElementById('formAgregarProducto')
@@ -38,20 +36,21 @@ function makeHtmlTable(productos) {
 
 // --------------------- DESNORMALIZACIÓN DE MENSAJES ---------------------------- 
 
-const denormalize = normalizr.denormalize;
-const schema = normalizr.schema;
+async function desNormalizarMensajes(mensajes) {
+    const denormalize = normalizr.denormalize;
+    const schema = normalizr.schema;
 
-const autor = new schema.Entity('autor');
-const msg = new schema.Entity('mensaje', {
-    author: autor
-});
-const posts = new schema.Entity('posts', {
-    mensajes: [msg]
-});
+    const autor = new schema.Entity('autor');
+    const msg = new schema.Entity('mensaje', {
+        author: autor
+    });
+    const posts = new schema.Entity('posts', {
+        mensajes: [msg]
+    });
 
-async function desNormalizarMensajes(mensajes, schema) {
     const denormalizedMensajes = denormalize(
-        mensajes.result, schema, mensajes.entities);
+        mensajes.result, posts, mensajes.entities);
+
     return denormalizedMensajes;
 }
 /* ----------------------------------------------------------------------------- */
@@ -85,8 +84,14 @@ formPublicarMensaje.addEventListener('submit', e => {
 });
 
 socket.on('mensajes', async mensajes => {
-    //const mensajesDesnormalizado = await desNormalizarMensajes(mensajes,posts);
-    const html = mensajes.mensajes.map(elem => {
+    console.log(mensajes);
+
+    let mensajesDesnormalizado = await desNormalizarMensajes(mensajes);
+    console.log(mensajesDesnormalizado)
+
+    //mensajesDesnormalizado = JSON.parse(JSON.stringify(mensajesDesnormalizado))
+
+    const html = mensajesDesnormalizado.mensajes.forEach(elem => {
         return (`<div><strong style="color:blue">${elem.author.id}</strong> <font style="color:brown">${elem.author.fechayHora}:</font> <em style="color:green">${elem.text}</em> <img width="50" src="${elem.author.avatar}" alt=" "> </div>`)
     }).join(" ");
     document.getElementById('mensajes').innerHTML = html;

@@ -89,9 +89,7 @@ socket.on('mensajes', async mensajes => {
     let mensajesDesnormalizado = await desNormalizarMensajes(mensajes);
     console.log(mensajesDesnormalizado)
 
-    //mensajesDesnormalizado = JSON.parse(JSON.stringify(mensajesDesnormalizado))
-
-    const html = mensajesDesnormalizado.mensajes.forEach(elem => {
+    const html = mensajesDesnormalizado.mensajes.map(elem => {
         return (`<div><strong style="color:blue">${elem.author.id}</strong> <font style="color:brown">${elem.author.fechayHora}:</font> <em style="color:green">${elem.text}</em> <img width="50" src="${elem.author.avatar}" alt=" "> </div>`)
     }).join(" ");
     document.getElementById('mensajes').innerHTML = html;

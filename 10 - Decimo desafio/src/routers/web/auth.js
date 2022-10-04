@@ -1,10 +1,20 @@
 import { Router } from 'express'
 import { webAuth } from '../../auth/index.js'
 
+import __dirname from '../../../__dirname.js'
+import path from 'path';
+
+const loginPath = path.join(__dirname, '/views/', 'login.html')
+
 const authWebRouter = new Router()
 
+authWebRouter.get('/', (req, res) => {
+    res.redirect('/login')
+})
+
 authWebRouter.get('/login', (req, res) => {
-    res.redirect('/')
+    res.sendFile(loginPath)
+    
 })
 
 authWebRouter.post('/login', (req, res) => {

@@ -11,31 +11,31 @@ import os from 'os';
 import { Server as HttpServer } from 'http';
 import { Server as IOServer } from 'socket.io';
 
-import { config } from './config.js';
+import { config } from './src/config.js';
 
-import { normalizarMensajes } from './normalizacion/index.js'
+import { normalizarMensajes } from './src/normalizacion/index.js'
 
-import { conectarDB } from './controllersdb.js';
+import { conectarDB } from './src/controllersdb.js';
 
-import logger from '../logger/logger.js'
+import logger from './logger/logger.js'
 
 // ruta raiz
 
-import __dirname from '../__dirname.js'
+import __dirname from './__dirname.js'
 
 // contenedores
 
-import ContenedorSQL from '../contenedores/ContenedorSQL.js';
-import ContenedorArchivo from '../contenedores/ContenedorArchivo.js';
+import ContenedorSQL from './contenedores/ContenedorSQL.js';
+import ContenedorArchivo from './contenedores/ContenedorArchivo.js';
 
 // routes
 
-import productosApiRouter from './routers/api/productos.js';
-import authWebRouter from './routers/web/auth.js'
-import homeWebRouter from './routers/web/home.js'
-import registerWebRouter from './routers/web/register.js'
-import infoRouter from './routers/web/info.js'
-import randomRouter from './routers/api/randoms.js'
+import productosApiRouter from './src/routers/api/productos.js';
+import authWebRouter from './src/routers/web/auth.js'
+import homeWebRouter from './src/routers/web/home.js'
+import registerWebRouter from './src/routers/web/register.js'
+import infoRouter from './src/routers/web/info.js'
+import randomRouter from './src/routers/api/randoms.js'
 
 // dotenv
 

@@ -42,7 +42,7 @@ function soloAdmins(req, res, next) {
 
 //middleware application webAuth
 
-//productosRouter.use(webAuth);
+productosRouter.use(webAuth);
 
 //SERVICIOS
 

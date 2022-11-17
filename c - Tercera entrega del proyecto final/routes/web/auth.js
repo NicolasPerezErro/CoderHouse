@@ -59,7 +59,7 @@ authWebRouter.get('/login', (req, res) => {
 
 })
 
-authWebRouter.post('/login', passport.authenticate('login', { //valida que exista el usuario
+authWebRouter.post('/login', passport.authenticate('login', { // valida que exista el usuario
     failureRedirect: '/loginFailed'
 }), (req, res) => {
     const body = req.body;
@@ -70,7 +70,7 @@ authWebRouter.post('/login', passport.authenticate('login', { //valida que exist
 
 authWebRouter.get('/logout', webAuth, (req, res) => {
     function renderizarLogout(){
-        console.log('destruyendo la sesion')
+        logger.info('destruyendo la sesion')
         res.render('logout', { nombre })
     }
     const nombre = req.session.user
@@ -78,7 +78,7 @@ authWebRouter.get('/logout', webAuth, (req, res) => {
         if (err) {
             res.json({ status: 'Logout Error', body: err })
         } else {
-            setTimeout(renderizarLogout, 5000); // Tiempo para destruir la sesion
+            setTimeout(renderizarLogout, 5000); // agrego tiempo para destruir la sesion
         }
     })
 })

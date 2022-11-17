@@ -1,5 +1,6 @@
-import admin from "firebase-admin"
+import admin from "firebase-admin";
 import config from '../config.js'
+import logger from '../../logger/logger.js'
 
 admin.initializeApp({
     credential: admin.credential.cert(config.firebase),
@@ -40,10 +41,10 @@ class ContenedorFirebase {
                     return null;
                 }
             } else {
-                console.log('vacio');
+                logger.info('vacio');
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -64,16 +65,16 @@ class ContenedorFirebase {
                 if (idEncontrado) {
                     const doc = this.coleccion.doc(`${idDoc}`);
                     await doc.delete();
-                    console.log("Registro borrado");
+                    logger.info("Registro borrado");
                 } else {
-                    console.log('no se encuentra');
+                    logger.info('no se encuentra');
                 }
 
             } else {
-                console.log('vacio');
+                logger.info('vacio');
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -87,7 +88,7 @@ class ContenedorFirebase {
                 return await this.obtenerTodosCarritos();
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -116,7 +117,7 @@ class ContenedorFirebase {
             let doc = this.coleccion.doc(`${ultimoIdDocum}`);
             await doc.create(objeto);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -146,14 +147,14 @@ class ContenedorFirebase {
                     })
 
                 } else {
-                    console.log('no se encuentra');
+                    logger.info('no se encuentra');
                 }
 
             } else {
-                console.log("no hay productos");
+                logger.info("no hay productos");
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -186,7 +187,7 @@ class ContenedorFirebase {
             let doc = this.coleccion.doc(`${ultimoIdDocum}`);
             await doc.create(objeto);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -219,16 +220,16 @@ class ContenedorFirebase {
                     })
 
                 } else {
-                    console.log('no se encuentra');
+                    logger.info('no se encuentra');
                 }
 
 
             } else {
-                console.log("no hay carrito");
+                logger.info("no hay carrito");
             }
 
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
 
     }
@@ -257,35 +258,35 @@ class ContenedorFirebase {
                     const response = item.data();
                     let productos = response.productos;
                     // busco id del producto
-                for (let i = 0; i < productos.length; i++) {
-                    if (productos[i].id == idProducto) {
-                        idProdEncontrado = true;
-                        posProducto = i;
+                    for (let i = 0; i < productos.length; i++) {
+                        if (productos[i].id == idProducto) {
+                            idProdEncontrado = true;
+                            posProducto = i;
+                        }
                     }
-                }
 
-                if (idProdEncontrado){
-                    productos.splice(posProducto, 1);
-                    await doc.update({
-                        productos: productos
-                    })
-                    console.log('producto borrado')
-                } else{
-                    console.log('producto no encontrado en el carrito');
-                }
+                    if (idProdEncontrado) {
+                        productos.splice(posProducto, 1);
+                        await doc.update({
+                            productos: productos
+                        })
+                        logger.info('producto borrado')
+                    } else {
+                        logger.info('producto no encontrado en el carrito');
+                    }
 
 
                 } else {
-                    console.log('no se encuentra');
+                    logger.info('no se encuentra');
                 }
 
 
             } else {
-                console.log("no hay carrito");
+                logger.info("no hay carrito");
             }
 
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 

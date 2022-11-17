@@ -1,5 +1,7 @@
 import express from 'express';
 
+import { webAuth } from '../src/auth/index.js'
+
 const { Router } = express;
 
 const carritosRouter = new Router();
@@ -8,6 +10,10 @@ import {
     productosDao as productosApi,
     carritosDao as carritosApi
 } from '../src/daos/index.js'
+
+//middleware application webAuth
+
+carritosRouter.use(webAuth);
 
 //SERVICIOS
 

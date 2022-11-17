@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import cluster from 'cluster';
 import parseArgs from 'minimist';
+import os from 'os';
 
 import { conectarDB } from './controllersdb.js';
 
@@ -13,13 +14,15 @@ dotenv.config();
 // minimist
 
 const options = {
-    default: { puerto: 8080, modo: 'FORK' },
-    alias: { p: 'puerto', m: 'modo' }
+    default: { puerto: 8080 },
+    alias: { p: 'puerto' }
 }
 
 const args = parseArgs(process.argv.slice(2), options);
 
-if (cluster.isPrimary && args.m === 'CLUSTER') {
+if (cluster.isPrimary && process.env.MODO === 'CLUSTER') {
+
+    const numCpu = os.cpus().length;
 
     for (let i = 0; i < numCpu; i++) {
         cluster.fork();
@@ -35,7 +38,7 @@ if (cluster.isPrimary && args.m === 'CLUSTER') {
 
         if (err) return logger.error('error en conexión de base de datos', err);
         logger.info('BASE DE DATOS CONECTADA');
-        logger.info(`MODO ${args.m}`)
+        logger.info(`MODO ${process.env.MODO}`)
 
         app.listen(args.p, (err) => {
             if (err) return logger.error('error en listen server', err);

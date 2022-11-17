@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import config from '../config.js'
+import logger from '../../logger/logger.js'
 
 // conexion a la base de datos
 
@@ -24,7 +25,7 @@ class ContenedorMongoDb {
                 return null;
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -33,22 +34,22 @@ class ContenedorMongoDb {
             const registroBuscado = await this.obtenerPorId(id);
             if (registroBuscado.length > 0) {
                 await this.coleccion.deleteOne({ id: id });
-                console.log("Registro borrado")
+                logger.info("Registro borrado")
             } else {
-                console.log("No se encuentra el resgistro")
+                logger.info("No se encuentra el resgistro")
             }
             return registroBuscado;
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
     async borrarTodo() {
         try {
             await this.coleccion.deleteMany({});
-            console.log("Todos los registros fueron eliminados");
+            logger.info("Todos los registros fueron eliminados");
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
 
     }
@@ -62,11 +63,11 @@ class ContenedorMongoDb {
                 //console.log('--Mostrando registros--');
                 //console.log(registros);
             } else {
-                console.log("No hay resgistros");
+                logger.info("No hay resgistros");
             }
             return registros;
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -81,15 +82,15 @@ class ContenedorMongoDb {
                     }
                 }
                 objeto["id"] = (ultimoId + 1);
-                console.log(ultimoId + 1);
+                logger.info(ultimoId + 1);
             } else {
                 objeto["id"] = 1;
             }
             objeto.timestamp = Date.now();
             await this.coleccion.collection.insertOne(objeto);
-            console.log("Producto guardado");
+            logger.info("Producto guardado");
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -107,12 +108,12 @@ class ContenedorMongoDb {
                         stock: elem.stock
                     }
                 });
-                console.log("Producto actualizado");
+                logger.info("Producto actualizado");
             } else {
-                console.log("Producto no encontrado");
+                logger.info("Producto no encontrado");
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -129,7 +130,7 @@ class ContenedorMongoDb {
                     }
                 }
                 objeto["id"] = (ultimoId + 1);
-                console.log(ultimoId + 1);
+                logger.info(ultimoId + 1);
             } else {
                 objeto["id"] = 1;
             }
@@ -137,7 +138,7 @@ class ContenedorMongoDb {
             objeto.productos = [];
             await this.coleccion.collection.insertOne(objeto);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -165,15 +166,15 @@ class ContenedorMongoDb {
                             productos: prodNuevo
                         }
                     });
-                    console.log('Producto insertado en el carrito')
+                    logger.info('Producto insertado en el carrito')
                 } else {
-                    console.log('carrito no encontrado');
+                    logger.info('carrito no encontrado');
                 }
             } else {
-                console.log("Carrito no encontrado")
+                logger.info("Carrito no encontrado")
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 
@@ -215,18 +216,18 @@ class ContenedorMongoDb {
                     });
 
 
-                    console.log("producto eliminado del carrito");
+                    logger.info("producto eliminado del carrito");
                 } else {
-                    console.log("ids no encontrados");
+                    logger.info("ids no encontrados");
                 }
 
-            } else{
-                console.log("Archivo vacío");
+            } else {
+                logger.info("Archivo vacío");
             }
 
 
         } catch (error) {
-            console.log(error);
+            logger.error(error);
         }
     }
 

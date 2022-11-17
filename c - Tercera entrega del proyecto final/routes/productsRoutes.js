@@ -3,12 +3,14 @@ dotenv.config();
 
 import express from 'express';
 
+import { webAuth } from '../src/auth/index.js'
+
 const { Router } = express;
 
 const productosRouter = new Router();
 
 import {
-productosDao as productosApi
+    productosDao as productosApi
 } from '../src/daos/index.js'
 
 
@@ -37,6 +39,10 @@ function soloAdmins(req, res, next) {
         next();
     }
 };
+
+//middleware application webAuth
+
+//productosRouter.use(webAuth);
 
 //SERVICIOS
 

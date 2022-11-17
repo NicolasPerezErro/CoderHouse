@@ -5,6 +5,7 @@ import session from 'express-session';
 
 import __dirname from '../__dirname.js'
 import config from './config.js'
+import logger from '../logger/logger.js'
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/productos', productosRouter);
 app.use('/api/carritos', carritosRouter);
 
 app.use("*", (req, res) => {
+    logger.warn(`ruta ${req.url} metodo ${req.method} no implementada`)
     res.send(
         {
             error: -2,

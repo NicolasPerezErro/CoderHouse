@@ -8,7 +8,7 @@ export default {
         path: './DB/'
     },
     mongodb: {
-        cnxStr: 'mongodb://localhost/ecommerce',
+        cnxStr: process.env.CNXSTR,
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -39,7 +39,7 @@ export default {
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 10000
+            expires: 60000
         }
     }
 }

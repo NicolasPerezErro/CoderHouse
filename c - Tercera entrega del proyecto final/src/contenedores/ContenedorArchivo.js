@@ -1,5 +1,6 @@
 import fs from 'fs'
 import config from '../config.js'
+import logger from '../../logger/logger.js'
 
 class ContenedorArchivo {
     constructor(nombreArchivo) {
@@ -29,9 +30,10 @@ class ContenedorArchivo {
                     return null;
                 }
             } else {
-                console.log("Archivo vacío");
+                logger.info("Archivo vacío");
             }
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
 
@@ -55,19 +57,21 @@ class ContenedorArchivo {
                     if (idEncontrado) {
                         this.vecObj.splice(pos, 1);
                         await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
-                        console.log("Objeto eliminado");
+                        logger.info("Objeto eliminado");
                     } else {
-                        console.log("id no encontrado");
+                        logger.info("id no encontrado");
                     }
 
                 } else {
-                    console.log("Archivo vacío");
+                    logger.info("Archivo vacío");
                 }
             } catch (error) {
+                logger.error('Error de escritura')
                 throw new Error('Error de escritura');
             }
 
         } catch (error) {
+            logger.error('Error de lectura')
             throw new error('Error de lectura');
         }
     }
@@ -79,8 +83,9 @@ class ContenedorArchivo {
         }
         try {
             await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(vecAux, null, '\t')}`);
-            console.log('Todos los objetos fueron eliminados');
+            logger.info('Todos los objetos fueron eliminados');
         } catch (error) {
+            logger.error('Error de escritura')
             throw new Error('Error de escritura');
         }
     }
@@ -94,9 +99,10 @@ class ContenedorArchivo {
                 this.vecObj = JSON.parse(contenido, null, '\t');
                 return this.vecObj;
             } else {
-                console.log("Archivo vacío");
+                logger.info("Archivo vacío");
             }
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
 
@@ -115,20 +121,22 @@ class ContenedorArchivo {
                         }
                     }
                     objeto["id"] = (ultimoId + 1);
-                    console.log(ultimoId + 1);
+                    logger.info(ultimoId + 1);
                 } else {
                     objeto["id"] = 1;
                 }
                 objeto.timestamp = Date.now();
                 this.vecObj.push(objeto);
                 await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
-                console.log("Escritura exitosa");
+                logger.info("Escritura exitosa");
 
             } catch (error) {
+                logger.error('Error de escritura')
                 throw new Error('Error de escritura');
             }
             return objeto.id;
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
     }
@@ -159,14 +167,16 @@ class ContenedorArchivo {
                     }
 
                 } else {
-                    console.log('producto no encontrado');
+                    logger.info('producto no encontrado');
                 }
                 await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
-                console.log("Actualizacion exitosa");
+                logger.info("Actualizacion exitosa");
             } catch (error) {
+                logger.error('Error de escritura')
                 throw new Error('Error de escritura');
             }
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
     }
@@ -186,7 +196,7 @@ class ContenedorArchivo {
                         }
                     }
                     objeto["id"] = (ultimoId + 1);
-                    console.log(ultimoId + 1);
+                    logger.info(ultimoId + 1);
                 } else {
                     objeto["id"] = 1;
                 }
@@ -194,13 +204,15 @@ class ContenedorArchivo {
                 objeto.productos = [];
                 this.vecObj.push(objeto);
                 await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
-                console.log("Escritura exitosa");
+                logger.info("Escritura exitosa");
 
             } catch (error) {
+                logger.error('Error de escritura')
                 throw new Error('Error de escritura');
             }
             return objeto.id;
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
     }
@@ -225,15 +237,17 @@ class ContenedorArchivo {
                     if (idEncontrado) {
                         this.vecObj[pos].productos.push(objeto);
                     } else {
-                        console.log('carrito no encontrado');
+                        logger.info('carrito no encontrado');
                     }
                 }
                 await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
-                console.log("producto agregado al carrito");
+                logger.info("producto agregado al carrito");
             } catch (error) {
+                logger.error('Error de escritura')
                 throw new Error('Error de escritura');
             }
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
     }
@@ -258,7 +272,7 @@ class ContenedorArchivo {
                             posCarrito = i;
                         }
                     }
-                    
+
                     //busco pos del producto
                     this.vecObj[posCarrito].productos.forEach(element => {
                         if (element.id == idProducto) {
@@ -271,19 +285,21 @@ class ContenedorArchivo {
                     if (idCarritoEncontrado && idProductoEncontrado) {
                         this.vecObj[posCarrito].productos.splice(posProd, 1);
                         await fs.promises.writeFile(`${config.fileSystem.path}${this.nombreArchivo}`, `${JSON.stringify(this.vecObj, null, '\t')}`);
-                        console.log("producto eliminado del carrito");
+                        logger.info("producto eliminado del carrito");
                     } else {
-                        console.log("ids no encontrados");
+                        logger.info("ids no encontrados");
                     }
 
                 } else {
-                    console.log("Archivo vacío");
+                    logger.info("Archivo vacío");
                 }
             } catch (error) {
+                logger.error('Error de escritura')
                 throw new Error('Error de escritura');
             }
 
         } catch (error) {
+            logger.error('Error de lectura')
             throw new Error('Error de lectura');
         }
     }

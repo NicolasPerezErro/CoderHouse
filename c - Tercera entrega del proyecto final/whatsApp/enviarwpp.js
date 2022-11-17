@@ -1,22 +1,22 @@
 import twilio from "twilio";
 
+// NO ME DEJA COMPRAR UN NUMERO TWILIO
 const accountSid = '';
 const authToken = '';
 
 const client = twilio(accountSid, authToken);
 
-const number = process.argv[2];
-const message = process.argv[3];
-
-const options = {
-    body: message,
-    from: 'whatsapp:+14155238886',
-    to: `whatsapp:${number}`
-};
-
-try {
-    const message = await client.messages.create(options);
-    console.log(message);
-} catch (error) {
-    console.log(error);
+function options(message,number) {
+    let wppOptions = '';
+    return wppOptions = {
+        body: message,
+        from: 'whatsapp:+1455238886',
+        to: `whatsapp:${number}`
+    }
 }
+
+async function enviarWhatsApp(message,number) {
+    await client.messages.create(options(message,number))
+}
+
+export default enviarWhatsApp;

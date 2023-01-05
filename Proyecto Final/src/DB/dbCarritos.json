@@ -1,0 +1,110 @@
+[
+	{
+		"id": 1,
+		"timestamp": 1661476644665,
+		"productos": [
+			{
+				"title": "mirinda",
+				"description": "bebida",
+				"code": 205,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "150",
+				"stock": 1320,
+				"id": 1,
+				"timestamp:": 1661471534124
+			},
+			{
+				"title": "pepsi",
+				"description": "bebida",
+				"code": 208,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "180",
+				"stock": 2430,
+				"id": 3,
+				"timestamp:": 1661471549389
+			},
+			{
+				"title": "mirinda",
+				"description": "bebida",
+				"code": 205,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "150",
+				"stock": 1320,
+				"id": 1,
+				"timestamp:": 1661471534124
+			},
+			{
+				"title": "agua",
+				"description": "bebida",
+				"code": 180,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "150",
+				"stock": 1320,
+				"id": 1,
+				"timestamp:": 1661471534124
+			},
+			{
+				"title": "vodka",
+				"description": "bebida",
+				"code": 850,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "150",
+				"stock": 1320,
+				"id": 1,
+				"timestamp:": 1661471534124
+			}
+		]
+	},
+	{
+		"id": 3,
+		"timestamp": 1661543086640,
+		"productos": [
+			{
+				"title": "mirinda",
+				"description": "bebida",
+				"code": 205,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "150",
+				"stock": 1320,
+				"id": 1,
+				"timestamp:": 1661471534124
+			}
+		]
+	},
+	{
+		"id": 4,
+		"timestamp": 1661552028757,
+		"productos": [
+			{
+				"title": "sprite",
+				"description": "bebida",
+				"code": 210,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "170",
+				"stock": 1000,
+				"id": 4,
+				"timestamp": 1661475393225
+			},
+			{
+				"title": "pepsi",
+				"description": "bebida",
+				"code": 208,
+				"thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnL-AibR8iEbML_MifNkcnQ0-fljiaSm3vQ-GqKdDrS6NM4VYf1wgIVpZ7E0fequdDQEjZ3SWtiA&usqp=CAc",
+				"price": "180",
+				"stock": 2430,
+				"id": 3,
+				"timestamp:": 1661471549389
+			}
+		]
+	},
+	{
+		"id": 5,
+		"timestamp": 1661559856947,
+		"productos": []
+	},
+	{
+		"id": 6,
+		"timestamp": 1668377079475,
+		"productos": []
+	}
+]
